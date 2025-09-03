@@ -80,75 +80,49 @@ var typed = new Typed(".typing-text", {
 
 
 const skills = [
-    { "name": ".NET", "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Microsoft_.NET_logo.svg/640px-Microsoft_.NET_logo.svg.png" },
-    { "name": "Angular", "icon": "https://img.icons8.com/color/48/000000/angularjs.png" },
-    { "name": "PrimeNG", "icon": "https://imgs.search.brave.com/NeUx82INfkVhWw5M-MwmVDLhwNCzXbaeNvPSs5cjtS0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vdGhlZnJv/bnRlbmRhcmNoaXRl/Y3QuY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDI1LzA1L3By/aW1lbmcud2VicD9m/aXQ9NjI0LDI3NCZz/c2w9MQ" },
-    { "name": "Versioning", "icon": "https://img.icons8.com/color/48/000000/git.png" },
-    { "name": "Django", "icon": "https://img.icons8.com/color/48/000000/django.png" },
-    { "name": "MSSQL", "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/SQL_%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF.png/640px-SQL_%D0%BB%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF.png" },
-    {
-        "name": "ReactJS",
-        "icon": "https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/000000/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png"
-    },
-    {
-        "name": "Bootstrap",
-        "icon": "https://img.icons8.com/color/48/000000/bootstrap.png"
-    },
-    {
-        "name": "Sass",
-        "icon": "https://img.icons8.com/color/48/000000/sass.png"
-    },
-    {
-        "name": "HTML5",
-        "icon": "https://img.icons8.com/color/48/000000/html-5--v1.png"
-    },
-    {
-        "name": "CSS3",
-        "icon": "https://img.icons8.com/color/48/000000/css3.png"
-    },
-    {
-        "name": "JavaScript",
-        "icon": "https://img.icons8.com/color/48/000000/javascript--v1.png"
-    },
-    {
-        "name": "Java",
-        "icon": "https://img.icons8.com/color/48/000000/java-coffee-cup-logo--v1.png"
-    },
-    {
-        "name": "Python",
-        "icon": "https://img.icons8.com/color/48/000000/python--v1.png"
-    },
-    {
-        "name": "MySQL",
-        "icon": "https://img.icons8.com/color/48/000000/mysql-logo.png"
-    },
-    {
-        "name": "Netlify",
-        "icon": "https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/48/000000/external-netlify-a-cloud-computing-company-that-offers-hosting-and-serverless-backend-services-for-static-websites-logo-shadow-tal-revivo.png"
-    },
-    {
-        "name": "Git VCS",
-        "icon": "https://img.icons8.com/color/48/000000/git.png"
-    },
-    {
-        "name": "GitHub",
-        "icon": "https://img.icons8.com/glyph-neue/48/ffffff/github.png"
-    },
-
+    { "name": ".NET", "icon": "simpleicons-dotnet" },
+    { "name": "Angular", "icon": "fab fa-angular" },
+    { "name": "PrimeNG", "icon": "simpleicons-primeng" },
+    { "name": "HTML5", "icon": "fab fa-html5" },
+    { "name": "Django", "icon": "simpleicons-django" },
+    { "name": "SQL", "icon": "fab fa-sql" },
+    { "name": "ReactJS", "icon": "fab fa-react" },
+    { "name": "Bootstrap", "icon": "fab fa-bootstrap" },
+    { "name": "Sass", "icon": "fab fa-sass" },
+    { "name": "CSS3", "icon": "fab fa-css3-alt" },
+    { "name": "JavaScript", "icon": "fab fa-js" },
+    { "name": "Java", "icon": "fab fa-java" },
+    { "name": "Python", "icon": "fab fa-python" },
+    { "name": "Netlify", "icon": "simpleicons-netlify" },
+    { "name": "Git VCS", "icon": "fab fa-git-alt" },
+    { "name": "GitHub", "icon": "fab fa-github" }
 ];
-
 function showSkills(skills) {
     let skillsContainer = document.getElementById("skillsContainer");
     let skillHTML = "";
+
     skills.forEach(skill => {
+        let iconHTML = "";
+
+        if (skill.icon.startsWith("fa")) {
+            // Font Awesome icon
+            iconHTML = `<i class="${skill.icon}" style="font-size:40px;"></i>`;
+        } else if (skill.icon.startsWith("simpleicons-")) {
+            // Simple Icons → load SVG by name
+            const siName = skill.icon.replace("simpleicons-", "");
+            iconHTML = `<img src="https://cdn.simpleicons.org/${siName}" 
+                        alt="${skill.name}" style="width:40px;height:40px;">`;
+        }
+
         skillHTML += `
       <div class="bar">
         <div class="info">
-          <img src="${skill.icon}" alt="${skill.name}" style="width:40px;height:40px;">
+          ${iconHTML}
           <span>${skill.name}</span>
         </div>
       </div>`;
     });
+
     skillsContainer.innerHTML = skillHTML;
 }
 
